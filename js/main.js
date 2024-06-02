@@ -60,11 +60,16 @@ class Grain {
         // update the position and calculate the offset
         this.positionx = positionx;
         this.offset = this.positionx * (buffer.duration / w); // pixels to seconds
+        this.amp = 1.0;
         
-        // update and calculate the amplitude
+        // update and calculate the pitch
         this.positiony = positiony;
-        this.amp = this.positiony / h;
-        this.amp = p.map(this.amp, 0.0, 1.0, 1.0, 0.0) * 0.7;
+        const scaledPositionY = p.map(this.positiony / h, 0.0, 1.0, 1.0, -1.0);
+
+        const semitones = this.mapInputToSemitones(scaledPositionY);
+        const quantizedPlaybackRate = this.semitoneToPlaybackRate(semitones);
+        console.log(quantizedPlaybackRate);
+        this.source.playbackRate.value = quantizedPlaybackRate
         
         // parameters
         this.attack = attack * 0.4;
@@ -100,6 +105,16 @@ class Grain {
             p.background();
             p.line(this.positionx + this.randomoffsetinpixels, 0, this.positionx + this.randomoffsetinpixels, p.height);
         }, 200);
+    }
+
+    // Function to calculate playback rate for a given number of semitones
+    semitoneToPlaybackRate(semitones) {
+        return Math.pow(2, semitones / 12);
+    }
+
+    // Function to map input range (-1.0 to 1.0) to semitones (-12 to 12)
+    mapInputToSemitones(input) {
+        return Math.round(input * 12); // Map and round to the nearest semitone
     }
 }
 
@@ -307,12 +322,12 @@ const grainsdisplay = (p) => {
         
         // 4 touches glitches on iPad
         if (event.touches.length < 4) {
-            for (let i = 0; i < event.touches.length; i++) {
-                if (event.touches[i].target.id === 'canvas2') {
-                    const id = event.touches[i].identifier; // the id will be used for voice stop
+            for (const touch of event.touches) {
+                if (touch.target.id === 'canvas2') {
+                    const id = touch.identifier; // the id will be used for voice stop
                     const v = new Voice(id);
-                    const clientX = event.touches[i].clientX;
-                    const clientY = event.touches[i].clientY;
+                    const clientX = touch.clientX;
+                    const clientY = touch.clientY;
                     
                     // multitouch optimization
                     let interval;
@@ -332,18 +347,18 @@ const grainsdisplay = (p) => {
     });
 
     canvas2.addEventListener('touchend', (event) => {
-        for (let i = 0; i < voices.length; i++) {
-            for (let j = 0; j < event.changedTouches.length; j++) {
-                if (voices[i].touchid === event.changedTouches[j].identifier) {
-                    voices[i].stop();
+        for (const voice of voices) {
+            for (const touch of event.changedTouches) {
+                if (voice.touchid === touch.identifier) {
+                    voice.stop();
                 }
             }
         }
         
         // safety and garbage collection
         if (event.touches.length < 1) {
-            for (let i = 0; i < voices.length; i++) {
-                voices[i].stop();
+            for (const voice of voices) {
+                voice.stop();
             }
             voices.length = 0;
             setTimeout(() => {
@@ -355,14 +370,14 @@ const grainsdisplay = (p) => {
     canvas2.addEventListener('touchmove', (event) => {
         event.preventDefault();
         
-        for (let i = 0; i < voices.length; i++) {
-            for (let j = 0; j < event.changedTouches.length; j++) {
-                if (voices[i].touchid === event.changedTouches[j].identifier) {
-                    if (event.changedTouches[j].clientY < h + 50) {
-                        voices[i].positiony = event.changedTouches[j].clientY;
-                        voices[i].positionx = event.changedTouches[j].clientX;
+        for (const voice of voices) {
+            for (const touch of event.changedTouches) {
+                if (voice.touchid === touch.identifier) {
+                    if (touch.clientY < h + 50) {
+                        voice.positiony = touch.clientY;
+                        voice.positionx = touch.clientX;
                     } else {
-                        voices[i].stop();
+                        voice.stop();
                     }
                 }
             }
