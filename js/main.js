@@ -19,12 +19,12 @@ let mouseState = false;
 let helpvisible = true;
 
 // control initial settings
-let attack = 0.40;
-let release = 0.40;
-let density = 0.85;
-let spread = 0.2;
+let attack = 0.14;
+let release = 0.14;
+let density = 1.05;
+let spread = 0;
 let reverb = 0.5;
-let pan = 0.1;
+let pan = 0;
 let trans = 1;
 
 /**
@@ -33,6 +33,7 @@ let trans = 1;
  */
 class Grain {
     constructor(p, buffer, positionx, positiony, attack, release, spread, pan) {
+        console.log(p, buffer, positionx, positiony, attack, release, spread, pan);
         this.now = context.currentTime; // update the time value
         // create the source
         this.source = context.createBufferSource();
@@ -60,7 +61,7 @@ class Grain {
         // update the position and calculate the offset
         this.positionx = positionx;
         this.offset = this.positionx * (buffer.duration / w); // pixels to seconds
-        this.amp = 1.0;
+        this.amp = 0.6;
         
         // update and calculate the pitch
         this.positiony = positiony;

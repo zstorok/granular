@@ -15,53 +15,59 @@ function guiinit() {
 
     $("#attack").knob({
         ...settings,
-        val: 50,
+        val: 14,
         bgColor: bg,
         fgColor: fg,
         change: (v) => {
             attack = v / 100;
+            console.log("Attack: " + attack);
         }
     });
 
     $("#release").knob({
         ...settings,
-        val: 50,
+        val: 14,
         bgColor: bg,
         fgColor: fg,
         change: (v) => {
             release = v / 100;
+            console.log("Release: " + release);
         }
     });
 
     $('#density').knob({
         ...settings,
-        val: 50,
+        max: 200,
+        val: 105,
         bgColor: bg,
         fgColor: fg,
         change: (v) => {
             density = v / 100;
+            console.log("Density: " + density);
         }
     });
 
     $('#spread').knob({
         ...settings,
         max: 200,
-        val: 50,
+        val: 0,
         bgColor: bg,
         fgColor: fg,
         change: (v) => {
             spread = v / 100;
+            console.log("Spread: " + spread);
         }
     });
 
     $('#pan').knob({
         ...settings,
         max: 200,
-        val: 50,
+        val: 0,
         bgColor: bg,
         fgColor: fg,
         change: (v) => {
             pan = v / 100;
+            console.log("Pan: " + pan);
         }
     });
 
