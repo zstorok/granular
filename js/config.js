@@ -1,6 +1,6 @@
 var knobValues = {
-    attack: 14,
-    release: 14,
+    attack: 10,
+    release: 10,
     density: 105,
     spread: 0,
     pan: 0
