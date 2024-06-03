@@ -25,7 +25,6 @@ let density = 1.05;
 let spread = 0;
 let reverb = 0.5;
 let pan = 0;
-let trans = 1;
 
 /**
  * Represents a grain.
@@ -37,7 +36,6 @@ class Grain {
         this.now = context.currentTime; // update the time value
         // create the source
         this.source = context.createBufferSource();
-        this.source.playbackRate.value = this.source.playbackRate.value * trans;
         this.source.buffer = buffer;
         // create the gain for enveloping
         this.gain = context.createGain();

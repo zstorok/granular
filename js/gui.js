@@ -71,44 +71,6 @@ function guiinit() {
         }
     });
 
-    $('#minus').click(() => {
-        trans *= 0.5;
-        $('#minus').css('opacity', 0.3);
-        setTimeout(() => {
-            $('#minus').css('opacity', 1);
-        }, 200);
-    });
-
-    $('#plus').click(() => {
-        trans *= 2;
-        $('#plus').css('opacity', 0.3);
-        setTimeout(() => {
-            $('#plus').css('opacity', 1);
-        }, 200);
-    });
-
-    const minus = document.getElementById('minus');
-    minus.addEventListener('touchstart', (e) => {
-        e.preventDefault();
-        $('#minus').css('opacity', 0.3);
-        trans *= 0.5;
-    });
-    minus.addEventListener('touchend', (e) => {
-        e.preventDefault();
-        $('#minus').css('opacity', 1);
-    });
-
-    const plus = document.getElementById('plus');
-    plus.addEventListener('touchstart', (e) => {
-        e.preventDefault();
-        $('#plus').css('opacity', 0.3);
-        trans *= 2;
-    });
-    plus.addEventListener('touchend', (e) => {
-        e.preventDefault();
-        $('#plus').css('opacity', 1);
-    });
-
     const load = () => {
         $('#canvas').show();
         $('#canvas2').show();

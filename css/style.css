@@ -95,31 +95,6 @@ body{
 	margin-bottom: -15px;
 }
 
-
-
-#transopse{
-	width: 100%;
-	margin: auto;
-	display: inline;
-}
-
-#plus{
-	background-color: #2a6496;
-	width: 48%;
-	cursor: pointer;
-	float: right;
-	color: white;
-}
-#minus{
-	background-color: #2a6496;
-	width: 48%;
-	height: 40%;
-	float: left;
-	cursor: pointer;
-	color: white;
-	
-}
-
 #github{
 	text-align: right;
 }
