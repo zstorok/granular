@@ -62,13 +62,15 @@ class Grain {
         this.amp = 0.6;
         
         // update and calculate the pitch
-        this.positiony = positiony;
-        const scaledPositionY = p.map(this.positiony / h, 0.0, 1.0, 1.0, -1.0);
+        if (positionYPitch) {
+            this.positiony = positiony;
+            const scaledPositionY = p.map(this.positiony / h, 0.0, 1.0, 1.0, -1.0);
 
-        const semitones = this.mapInputToSemitones(scaledPositionY);
-        const quantizedPlaybackRate = this.semitoneToPlaybackRate(semitones);
-        console.log(quantizedPlaybackRate);
-        this.source.playbackRate.value = quantizedPlaybackRate
+            const semitones = this.mapInputToSemitones(scaledPositionY);
+            const quantizedPlaybackRate = this.semitoneToPlaybackRate(semitones);
+            console.log(quantizedPlaybackRate);
+            this.source.playbackRate.value = quantizedPlaybackRate
+        }
         
         // parameters
         this.attack = attack * 0.4;

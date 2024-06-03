@@ -5,3 +5,5 @@ var knobValues = {
     spread: 0,
     pan: 0
 };
+
+var positionYPitch = false;
