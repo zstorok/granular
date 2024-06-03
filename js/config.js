@@ -7,3 +7,4 @@ var knobValues = {
 };
 
 var positionYPitch = false;
+var maxTouches = 4;

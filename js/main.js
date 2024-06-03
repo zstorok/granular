@@ -319,30 +319,27 @@ const grainsdisplay = (p) => {
     // touch events
     const canvas2 = document.getElementById('canvas2');
     canvas2.addEventListener('touchstart', (event) => {
-        event.preventDefault(); // to prevent scrolling
-        
-        // 4 touches glitches on iPad
-        if (event.touches.length < 4) {
-            for (const touch of event.touches) {
-                if (touch.target.id === 'canvas2') {
-                    const id = touch.identifier; // the id will be used for voice stop
-                    const v = new Voice(id);
-                    const clientX = touch.clientX;
-                    const clientY = touch.clientY;
-                    
-                    // multitouch optimization
-                    let interval;
-                    // calculate the reverse interval
-                    if (event.touches.length > 1) {
-                        interval = p.map(density, 0, 1, 1, 0.7);
-                    } else {
-                        interval = p.map(density, 0, 1, 1, 0);
-                    }
-                    
-                    // play
-                    v.playtouch(p, clientX, clientY, interval);
-                    voices.push(v);
+        event.preventDefault(); // to prevent scrolling      
+        for (let i = 0; i < Math.min(maxTouches, event.touches.length); i++) {
+            const touch = event.touches[i];
+            if (touch.target.id === 'canvas2') {
+                const id = touch.identifier; // the id will be used for voice stop
+                const v = new Voice(id);
+                const clientX = touch.clientX;
+                const clientY = touch.clientY;
+                
+                // multitouch optimization
+                let interval;
+                // calculate the reverse interval
+                if (event.touches.length > 1) {
+                    interval = p.map(density, 0, 1, 1, 0.7);
+                } else {
+                    interval = p.map(density, 0, 1, 1, 0);
                 }
+                
+                // play
+                v.playtouch(p, clientX, clientY, interval);
+                voices.push(v);
             }
         }
     });
