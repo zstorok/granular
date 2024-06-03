@@ -5,7 +5,7 @@ function guiinit() {
         min: 0,
         max: 100,
         width: dialwidth,
-        displayInput: false,
+        displayInput: true,
         angleArc: 180,
         angleOffset: -90
     };
