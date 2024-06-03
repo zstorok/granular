@@ -15,7 +15,7 @@ function guiinit() {
 
     $("#attack").knob({
         ...settings,
-        val: 14,
+        val: knobValues.attack,
         bgColor: bg,
         fgColor: fg,
         change: (v) => {
@@ -26,7 +26,7 @@ function guiinit() {
 
     $("#release").knob({
         ...settings,
-        val: 14,
+        val: knobValues.release,
         bgColor: bg,
         fgColor: fg,
         change: (v) => {
@@ -38,7 +38,7 @@ function guiinit() {
     $('#density').knob({
         ...settings,
         max: 200,
-        val: 105,
+        val: knobValues.density,
         bgColor: bg,
         fgColor: fg,
         change: (v) => {
@@ -50,7 +50,7 @@ function guiinit() {
     $('#spread').knob({
         ...settings,
         max: 200,
-        val: 0,
+        val: knobValues.spread,
         bgColor: bg,
         fgColor: fg,
         change: (v) => {
@@ -62,7 +62,7 @@ function guiinit() {
     $('#pan').knob({
         ...settings,
         max: 200,
-        val: 0,
+        val: knobValues.pan,
         bgColor: bg,
         fgColor: fg,
         change: (v) => {

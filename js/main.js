@@ -19,12 +19,12 @@ let mouseState = false;
 let helpvisible = true;
 
 // control initial settings
-let attack = 0.14;
-let release = 0.14;
-let density = 1.05;
-let spread = 0;
-let reverb = 0.5;
-let pan = 0;
+let attack = knobValues.attack / 100;
+let release = knobValues.release / 100;
+let density = knobValues.density / 100;
+let spread = knobValues.spread / 100;
+let reverb = knobValues.reverb;
+let pan = knobValues.pan / 100;
 
 /**
  * Represents a grain.
