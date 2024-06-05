@@ -26,6 +26,9 @@ let spread = knobValues.spread / 100;
 let reverb = knobValues.reverb;
 let pan = knobValues.pan / 100;
 
+// Semitone intervals for the minor pentatonic scale
+const minorPentatonicIntervals = [-12, -9, -7, -5, -2, 0, 3, 5, 7, 10, 12, 15, 17, 19, 22];
+
 /**
  * Represents a grain.
  * @class
@@ -66,10 +69,19 @@ class Grain {
             this.positiony = positiony;
             const scaledPositionY = p.map(this.positiony / h, 0.0, 1.0, 1.0, -1.0);
 
-            const semitones = this.mapInputToSemitones(scaledPositionY);
-            const quantizedPlaybackRate = this.semitoneToPlaybackRate(semitones);
-            console.log(quantizedPlaybackRate);
-            this.source.playbackRate.value = quantizedPlaybackRate
+            // Quantize pitch based on the selected mode
+            if (pitchQuantizeMode === QuantizeMode.CHROMATIC || pitchQuantizeMode === QuantizeMode.MINOR_PENTATONIC) {
+                const semitones = pitchQuantizeMode === QuantizeMode.CHROMATIC
+                    ? this.mapInputToSemitones(scaledPositionY)
+                    : this.mapInputToMinorPentatonic(scaledPositionY);
+                const quantizedPlaybackRate = this.semitoneToPlaybackRate(semitones);
+                console.log("Quantized playback rate: " + quantizedPlaybackRate);
+                this.source.playbackRate.value = quantizedPlaybackRate;
+            } else if (pitchQuantizeMode === QuantizeMode.NONE) {
+                this.source.playbackRate.value = scaledPositionY;    
+            } else {
+                console.error('Invalid pitch quantize mode');
+            }
         }
         
         // parameters
@@ -117,6 +129,13 @@ class Grain {
     mapInputToSemitones(input) {
         return Math.round(input * 12); // Map and round to the nearest semitone
     }
+
+    // Function to map input range (-1.0 to 1.0) to the minor pentatonic scale
+    mapInputToMinorPentatonic(input) {
+        // Map input to an index in the minor pentatonic intervals array
+        const index = Math.round((input + 1) / 2 * (minorPentatonicIntervals.length - 1));
+        return minorPentatonicIntervals[index];
+    };    
 }
 
 // the Voice class

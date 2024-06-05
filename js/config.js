@@ -6,5 +6,13 @@ var knobValues = {
     pan: 0
 };
 
-var positionYPitch = false;
+var positionYPitch = true;
 var maxTouches = 4;
+
+const QuantizeMode = Object.freeze({
+    NONE: "None",
+    CHROMATIC: "Chromatic",
+    MINOR_PENTATONIC: "Minor Pentatonic",
+});
+
+var pitchQuantizeMode = QuantizeMode.MINOR_PENTATONIC;

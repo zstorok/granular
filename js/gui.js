@@ -71,6 +71,19 @@ function guiinit() {
         }
     });
 
+    $('input[name="pitchQuantizeMode"][value="' + pitchQuantizeMode + '"]').prop('checked', true);
+
+    $('input[name="pitchQuantizeMode"]').change(function () {
+        var mode = $(this).val();
+        console.log("Pitch Quantize Mode: " + mode);
+        // handle the new mode here
+        for (var enumMode in QuantizeMode) {
+            if (QuantizeMode.hasOwnProperty(enumMode) && QuantizeMode[enumMode] == mode) {
+                pitchQuantizeMode = mode;
+            }
+        }
+    });
+
     const load = () => {
         $('#canvas').show();
         $('#canvas2').show();
