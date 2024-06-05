@@ -71,6 +71,19 @@ function guiinit() {
         }
     });
 
+    $('#tuning').knob({
+        ...settings,
+        min: -500,
+        max: 500,
+        val: knobValues.tuning,
+        bgColor: bg,
+        fgColor: fg,
+        change: (v) => {
+            tuning = v / 1000;
+            console.log("Tuning: " + tuning);
+        }
+    });
+
     $('input[name="pitchQuantizeMode"][value="' + pitchQuantizeMode + '"]').prop('checked', true);
 
     $('input[name="pitchQuantizeMode"]').change(function () {

@@ -25,6 +25,7 @@ let density = knobValues.density / 100;
 let spread = knobValues.spread / 100;
 let reverb = knobValues.reverb;
 let pan = knobValues.pan / 100;
+let tuning = knobValues.tuning / 1000;
 
 // Semitone intervals for the minor pentatonic scale
 const minorPentatonicIntervals = [-12, -9, -7, -5, -2, 0, 3, 5, 7, 10, 12, 15, 17, 19, 22];
@@ -75,10 +76,11 @@ class Grain {
                     ? this.mapInputToSemitones(scaledPositionY)
                     : this.mapInputToMinorPentatonic(scaledPositionY);
                 const quantizedPlaybackRate = this.semitoneToPlaybackRate(semitones);
-                console.log("Quantized playback rate: " + quantizedPlaybackRate);
-                this.source.playbackRate.value = quantizedPlaybackRate;
+                this.source.playbackRate.value = quantizedPlaybackRate + tuning;
+                console.log("Quantized playback rate: " + this.source.playbackRate.value);
             } else if (pitchQuantizeMode === QuantizeMode.NONE) {
-                this.source.playbackRate.value = scaledPositionY;    
+                this.source.playbackRate.value = scaledPositionY + tuning;
+                console.log("Unquantized layback rate: " + this.source.playbackRate.value);
             } else {
                 console.error('Invalid pitch quantize mode');
             }

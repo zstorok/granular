@@ -46,33 +46,37 @@
 
 	<!-- controls row -->
 	<div class='row' id='controls'>
-		<div class='col-md-2 col-sm-2 col-xs-2'>
+		<div class='col-md-1 col-sm-1 col-xs-2'>
 			<div class='label hidden-xs'>attack</div><br><br>
 			<input type="text" class="dial" id='attack' data-min='0' data-max='100'><br><br>
-
 		</div>
 
-		<div class='col-md-2 col-sm-2 col-xs-2'>
+		<div class='col-md-1 col-sm-1 col-xs-2'>
 			<div class='label hidden-xs'>release</div><br><br>
 			<input type="text" class="dial" id='release' data-min='0' data-max='100'>
 		</div>
 
-		<div class='col-md-2 col-sm-2 col-xs-2'>
+		<div class='col-md-1 col-sm-1 col-xs-2'>
 			<div class='label hidden-xs'>density</div><br><br>
 			<input type="text" class="dial" id='density' data-min='0' data-max='200'>
 		</div>
 
-		<div class='col-md-2 col-sm-2 col-xs-2'>
+		<div class='col-md-1 col-sm-1 col-xs-2'>
 			<div class='label hidden-xs'>spread</div><br><br>
 			<input type="text" class="dial" id='spread' data-min='0' data-max='100'>
 		</div>
 
-		<div class='col-md-2 col-sm-2 col-xs-2'>
+		<div class='col-md-1 col-sm-1 col-xs-2'>
 			<div class='label hidden-xs'>pan</div><br><br>
 			<input type="text" class="dial" id='pan' data-min='0' data-max='100'>
 		</div>
 
-		<div class='col-md-2 col-sm-2 col-xs-2'>
+		<div class='col-md-1 col-sm-1 col-xs-2'>
+			<div class='label hidden-xs'>tuning</div><br><br>
+			<input type="text" class="dial" id='tuning' data-min='-500' data-max='500'>
+		</div>
+
+		<div class='col-md-1 col-sm-2 col-xs-2'>
 			<div class='label hidden-xs'>quantize mode</div><br><br>
 			<input type="radio" id="none" name="pitchQuantizeMode" value="None">
 			<label for="none">None</label><br>
@@ -84,7 +88,7 @@
 	</div>
 	<script>
 		window.onload = function () {
-			var knobs = ['attack', 'release', 'density', 'spread', 'pan'];
+			var knobs = ['attack', 'release', 'density', 'spread', 'pan', 'tuning'];
 			knobs.forEach(function (knob) {
 				var input = document.getElementById(knob);
 				input.value = knobValues[knob];
