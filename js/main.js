@@ -466,6 +466,7 @@ $(document).ready(() => {
         } 
         globalSample = new Sample(buffer);
         globalSample.loop($('#loop').prop('checked'));
+        globalSample.source.playbackRate.value = 1.0 + tuning;
         globalSample.play();
     });
 
