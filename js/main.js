@@ -136,9 +136,11 @@ class Grain {
     // Function to map input range (-1.0 to 1.0) to the minor pentatonic scale
     mapInputToMinorPentatonic(input) {
         // Map input to an index in the minor pentatonic intervals array
-        const index = Math.round((input + 1) / 2 * (minorPentatonicIntervals.length - 1));
+        const scaledInput = (input + 1) / 2; // Scale input to the range [0, 1]
+        const quantizedPitchArrayLength = minorPentatonicIntervals.length - 1;
+        const index = Math.round(scaledInput * quantizedPitchArrayLength);
         const interval = minorPentatonicIntervals[index]
-        console.log(input, index, interval)
+        console.log(input, scaledInput, quantizedPitchArrayLength, index, interval)
         return interval;
     };    
 }
@@ -287,6 +289,17 @@ const waveformdisplay = (p) => {
         }
     };
 
+    const drawPitchQuantizeOverlay = () => {
+        if (pitchQuantizeMode === QuantizeMode.MINOR_PENTATONIC) {
+            const intervalHeight = h / (minorPentatonicIntervals.length -1);
+            for (let i = 0; i < minorPentatonicIntervals.length; i++) {
+                const y = i * intervalHeight;
+                p.fill(0, 0, 255, 40);
+                p.rect(0, y, w, intervalHeight);
+            }
+        }
+    };
+
     p.setup = () => {
         p.size(w, h);
         p.background(0); // background black
@@ -298,10 +311,12 @@ const waveformdisplay = (p) => {
             // redraw buffer on resize
             p.stroke(255);
             drawBuffer();
+            drawPitchQuantizeOverlay();
         });
         p.strokeWeight(0.01);
         p.stroke(255);
         drawBuffer();
+        drawPitchQuantizeOverlay();
         p.noLoop();
     };
 };
