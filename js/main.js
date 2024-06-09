@@ -29,7 +29,7 @@ let pan = knobValues.pan / 100;
 let tuning = knobValues.tuning / 1000;
 
 // Semitone intervals for the minor pentatonic scale
-const minorPentatonicIntervals = [-12, -9, -7, -5, -2, 0, 3, 5, 7, 10, 12, 15, 17, 19, 22];
+const minorPentatonicIntervals = [-12, -9, -7, -5, -2, 0, 3, 5, 7, 10, 12];
 
 /**
  * Represents a grain.
@@ -137,7 +137,9 @@ class Grain {
     mapInputToMinorPentatonic(input) {
         // Map input to an index in the minor pentatonic intervals array
         const index = Math.round((input + 1) / 2 * (minorPentatonicIntervals.length - 1));
-        return minorPentatonicIntervals[index];
+        const interval = minorPentatonicIntervals[index]
+        console.log(input, index, interval)
+        return interval;
     };    
 }
 
