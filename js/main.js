@@ -12,6 +12,7 @@ let w, h, data;
 const drawingdata = []; // an array that keeps the data
 const voices = []; // an array for touch events - polyphonic
 const voicesmono = []; // this will be used for mouse events - monophonic
+let globalSample;
 let isloaded = false;
 let X = 0;
 let Y = 0;
@@ -217,6 +218,28 @@ class Voice {
 	}
 }
 
+class Sample {
+    constructor(buffer) {
+        console.log("Sample " + buffer);
+        // create the source
+        this.source = context.createBufferSource();
+        this.source.buffer = buffer;
+        this.source.connect(master);
+    }
+
+    play() {
+        this.source.start();
+    }
+
+    stop() {
+        this.source.stop();
+    }
+
+    loop(_loop) {
+        this.source.loop = _loop;    
+    }
+}
+
 // loading the first sound with XMLHttpRequest
 const request = new XMLHttpRequest();
 request.open('GET', 'audio/guitar.mp3', true);
@@ -404,6 +427,8 @@ const grainsdisplay = (p) => {
     });
 };
 
+
+
 // onload
 $(document).ready(() => {
     window.history.pushState(null, null, '');
@@ -416,4 +441,28 @@ $(document).ready(() => {
     });
     // gui
     guiinit();
+
+    $('#play').button().click(function() {
+        console.log("Play");
+        if (globalSample) {
+            globalSample.stop();
+        } 
+        globalSample = new Sample(buffer);
+        globalSample.loop($('#loop').prop('checked'));
+        globalSample.play();
+    });
+
+    $('#stop').button().click(function () {
+        console.log("Stop");
+        if (globalSample) {
+            globalSample.stop();
+        }
+    });
+
+    $('#loop').button().change(function () {
+        console.log("Loop: " + $(this).prop('checked'));
+        if (globalSample) {
+            globalSample.source.loop = $(this).prop('checked');
+        }
+    });
 });
