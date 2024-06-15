@@ -73,7 +73,7 @@ function guiinit() {
 
     $('#tuning').knob({
         ...settings,
-        min: -500,
+        min: -1000,
         max: 500,
         val: knobValues.tuning,
         bgColor: bg,
