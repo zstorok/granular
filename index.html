@@ -77,7 +77,7 @@
 		</div>
 
 		<div class='col-md-1 col-sm-2 col-xs-2'>
-			<div class='label hidden-xs'>quantize mode</div><br><br>
+			<div class='label hidden-xs'>quantize</div><br><br>
 			<input type="radio" id="none" name="pitchQuantizeMode" value="None">
 			<label for="none">None</label><br>
 			<input type="radio" id="chromatic" name="pitchQuantizeMode" value="Chromatic">
@@ -86,14 +86,13 @@
 			<label for="minorPentatonic">Minor Pentatonic</label>
 		</div>
 
-		<div class='col-md-1 col-sm-1 col-xs-2'>
-			<button class="btn btn-primary w-100 full-height" id="play">Play</button>
+		<div class='col-md-2 col-sm-2 col-xs-2'>
+			<button class="btn w-100 full-height" id="play">Play</button>
+			<button class="btn w-100 full-height" id="reversePlay">Reverse play</button>
+			<button class="btn w-100 full-height" id="stop">Stop</button>
 		</div>
 		<div class='col-md-1 col-sm-1 col-xs-2'>
-			<button class="btn btn-primary w-100 full-height" id="stop">Stop</button>
-		</div>
-		<div class='col-md-1 col-sm-1 col-xs-2'>
-			<input class="w-100 full-height" type="checkbox" id="loop">Loop</button>
+			<input class="w-100 full-height" type="checkbox" id="loop">Loop</input>
 		</div>
 	</div>
 	<script>

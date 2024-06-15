@@ -160,3 +160,18 @@ body{
     height: 100%;
 	width: 100%;
 }
+
+#play{
+	font-size: 1.3em;
+	background-color: lightgreen;
+}
+
+#reversePlay{
+	font-size: 1.3em;
+	background-color: lightblue;
+}
+
+#stop{
+	font-size: 1.3em;
+	background-color: pink;
+}

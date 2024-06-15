@@ -222,10 +222,14 @@ class Voice {
 }
 
 class Sample {
-    constructor(buffer, loop = false, playbackRate = 1.0) {
+    constructor(buffer, loop = false, playbackRate = 1.0, reverse = false) {
         console.log("Sample " + buffer);
         this.context = context; // Assuming 'context' is the AudioContext instance you have elsewhere
-        this.originalBuffer = buffer;
+        if (reverse) {
+            this.buffer = this.reverseBuffer(buffer);
+        } else {
+            this.buffer = buffer;
+        }
         this.master = master; // Assuming 'master' is an AudioNode you have elsewhere
         this.source = null; // Initialize source as null
         this.loop = loop; // Store loop option
@@ -234,13 +238,13 @@ class Sample {
 
     createSource() {
         this.source = this.context.createBufferSource();
-        this.source.buffer = this.originalBuffer;
+        this.source.buffer = this.buffer;
         this.source.loop = this.loop; // Apply loop setting
         this.source.playbackRate.value = this.playbackRate; // Apply playbackRate setting
         this.source.connect(this.master);
     }
 
-    play(reverse = false) {
+    play() {
         this.createSource(); // Create a new source node
         this.source.start(0); // Start at the beginning for normal playback
     }
@@ -261,13 +265,21 @@ class Sample {
     }
 
     reverseBuffer(audioBuffer) {
-        for (let i = 0; i < audioBuffer.numberOfChannels; i++) {
+        const numberOfChannels = audioBuffer.numberOfChannels;
+        const length = audioBuffer.length;
+        const sampleRate = audioBuffer.sampleRate;
+        const newBuffer = context.createBuffer(numberOfChannels, length, sampleRate);
+        
+        for (let i = 0; i < numberOfChannels; i++) {
             const channel = audioBuffer.getChannelData(i);
-            for (let j = 0, k = channel.length - 1; j < k; j++, k--) {
-                [channel[j], channel[k]] = [channel[k], channel[j]];
+            const newChannel = newBuffer.getChannelData(i);
+            
+            for (let j = 0, k = length - 1; j < length; j++, k--) {
+                newChannel[j] = channel[k];
             }
         }
-        return audioBuffer;
+        
+        return newBuffer;
     }
 
     getCurrentPlayheadPosition() {
@@ -505,6 +517,15 @@ $(document).ready(() => {
         globalSample.play();
     });
 
+    $('#reversePlay').button().click(function () {
+        console.log("Reverse play");
+        if (globalSample) {
+            globalSample.stop();
+        } 
+        globalSample = new Sample(buffer, $('#loop').prop('checked'), 1.0 + tuning, true);
+        globalSample.play();
+    });    
+
     $('#stop').button().click(function () {
         console.log("Stop");
         if (globalSample) {
@@ -519,10 +540,4 @@ $(document).ready(() => {
         }
     });
 
-    $('#reverse').button().change(function () {
-        console.log("Reverse: " + $(this).prop('checked'));
-        if (globalSample) {
-            globalSample.play($(this).prop('checked'));
-        }
-    });
 });
