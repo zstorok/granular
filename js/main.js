@@ -222,24 +222,62 @@ class Voice {
 }
 
 class Sample {
-    constructor(buffer) {
+    constructor(buffer, loop = false, playbackRate = 1.0) {
         console.log("Sample " + buffer);
-        // create the source
-        this.source = context.createBufferSource();
-        this.source.buffer = buffer;
-        this.source.connect(master);
+        this.context = context; // Assuming 'context' is the AudioContext instance you have elsewhere
+        this.originalBuffer = buffer;
+        this.master = master; // Assuming 'master' is an AudioNode you have elsewhere
+        this.source = null; // Initialize source as null
+        this.loop = loop; // Store loop option
+        this.playbackRate = playbackRate; // Store playbackRate option
     }
 
-    play() {
-        this.source.start();
+    createSource() {
+        this.source = this.context.createBufferSource();
+        this.source.buffer = this.originalBuffer;
+        this.source.loop = this.loop; // Apply loop setting
+        this.source.playbackRate.value = this.playbackRate; // Apply playbackRate setting
+        this.source.connect(this.master);
+    }
+
+    play(reverse = false) {
+        this.createSource(); // Create a new source node
+        this.source.start(0); // Start at the beginning for normal playback
     }
 
     stop() {
-        this.source.stop();
+        if (this.source) {
+            this.source.stop();
+            this.source.disconnect(); // Disconnect from the master node
+            this.source = null; // Dispose of the source node
+        }
     }
 
-    loop(_loop) {
-        this.source.loop = _loop;    
+    toggleLoop(_loop) {
+        this.loop = _loop;
+        if (this.source) {
+            this.source.loop = this.loop;
+        }
+    }
+
+    reverseBuffer(audioBuffer) {
+        for (let i = 0; i < audioBuffer.numberOfChannels; i++) {
+            const channel = audioBuffer.getChannelData(i);
+            for (let j = 0, k = channel.length - 1; j < k; j++, k--) {
+                [channel[j], channel[k]] = [channel[k], channel[j]];
+            }
+        }
+        return audioBuffer;
+    }
+
+    getCurrentPlayheadPosition() {
+        if (!this.source) return 0; // If nothing is playing, return 0
+
+        const elapsedTime = this.context.currentTime - this.startTime;
+        const bufferDuration = this.source.buffer.duration / this.playbackRate;
+        const currentPlayheadPosition = (elapsedTime % bufferDuration) * this.playbackRate;
+
+        return currentPlayheadPosition;
     }
 }
 
@@ -463,9 +501,7 @@ $(document).ready(() => {
         if (globalSample) {
             globalSample.stop();
         } 
-        globalSample = new Sample(buffer);
-        globalSample.loop($('#loop').prop('checked'));
-        globalSample.source.playbackRate.value = 1.0 + tuning;
+        globalSample = new Sample(buffer, $('#loop').prop('checked'), 1.0 + tuning);
         globalSample.play();
     });
 
@@ -479,7 +515,14 @@ $(document).ready(() => {
     $('#loop').button().change(function () {
         console.log("Loop: " + $(this).prop('checked'));
         if (globalSample) {
-            globalSample.source.loop = $(this).prop('checked');
+            globalSample.toggleLoop($(this).prop('checked'));
+        }
+    });
+
+    $('#reverse').button().change(function () {
+        console.log("Reverse: " + $(this).prop('checked'));
+        if (globalSample) {
+            globalSample.play($(this).prop('checked'));
         }
     });
 });
