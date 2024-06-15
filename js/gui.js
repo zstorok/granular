@@ -3,7 +3,7 @@ function guiinit() {
 
     const settings = {
         min: 0,
-        max: 100,
+        max: 20,
         width: dialwidth,
         displayInput: true,
         angleArc: 180,
@@ -37,7 +37,7 @@ function guiinit() {
 
     $('#density').knob({
         ...settings,
-        max: 200,
+        max: 110,
         val: knobValues.density,
         bgColor: bg,
         fgColor: fg,
