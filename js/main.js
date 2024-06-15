@@ -37,7 +37,6 @@ const minorPentatonicIntervals = [-12, -9, -7, -5, -2, 0, 3, 5, 7, 10, 12];
  */
 class Grain {
     constructor(p, buffer, positionx, positiony, attack, release, spread, pan) {
-        console.log(p, buffer, positionx, positiony, attack, release, spread, pan);
         this.now = context.currentTime; // update the time value
         // create the source
         this.source = context.createBufferSource();
