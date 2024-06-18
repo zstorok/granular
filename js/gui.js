@@ -81,7 +81,7 @@ function guiinit() {
         change: (v) => {
             tuning = v / 1000;
             console.log("Tuning: " + tuning);
-            if (globalSample) {
+            if (globalSample && globalSample.source) {
                 globalSample.source.playbackRate.value = 1.0 + tuning;
             }
         }
