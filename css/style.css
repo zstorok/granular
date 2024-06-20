@@ -200,6 +200,14 @@ body{
     pointer-events: auto;
 }
 
+/* Center the toggle switch within the container */
+.toggle-switch {
+    display: flex; /* Use flexbox */
+    justify-content: center; /* Center horizontally */
+    align-items: center; /* Center vertically */
+    height: 100%; /* Take full height of the parent container */
+}
+
 /* Hide the actual checkbox */
 .toggle-switch .checkbox {
     display: none;
@@ -209,7 +217,7 @@ body{
 .toggle-switch .label {
     cursor: pointer;
     text-indent: -9999px;
-    width: 50px; /* Width of the toggle */
+    width: 60px; /* Width of the toggle */
     height: 25px; /* Height of the toggle */
     background: grey;
     display: block;
@@ -238,4 +246,9 @@ body{
 .toggle-switch .checkbox:checked + .label:after {
     left: calc(100% - 2px);
     transform: translateX(-100%);
+}
+
+.btn-group .btn {
+	font-size: 1em;
+	background-color: lightblue;
 }

@@ -61,18 +61,18 @@
 			<input type="text" class="dial" id='density' data-min='0' data-max='110'>
 		</div>
 
-		<div class='col-md-4 col-sm-4 col-xs-4'>
-			<button class="btn full-height" id="play">Play</button>
-			<button class="btn full-height" id="reversePlay">Reverse play</button>
-			<button class="btn w-100 full-height" id="stop">Stop</button>
-		</div>
-
-		<div class='col-md-1 col-sm-1 col-xs-1'>
+		<div class='col-md-2 col-sm-2 col-xs-2'>
 			<div class='label hidden-xs'>loop</div><br><br>
 			<div class='toggle-switch'>
 				<input class="w-100 full-height checkbox" type="checkbox" id="loop">
 				<label for="loop" class="label"></label>
 			</div>
+		</div>
+
+		<div class='col-md-4 col-sm-4 col-xs-4'>
+			<button class="btn full-height" id="play">Play</button>
+			<button class="btn full-height" id="reversePlay">Reverse play</button>
+			<button class="btn w-100 full-height" id="stop">Stop</button>
 		</div>
 	</div>
 	<div class='row' id='controls-row-1'>
@@ -94,25 +94,19 @@
 		<div class='col-md-2 col-sm-2 col-xs-2'>
 			<div class='label hidden-xs'>quantize</div><br><br>
 			<form>
-				<div class="form-group">
-					<div class="radio">
-						<label>
-							<input type="radio" name="pitchQuantizeMode" id="none" value="None" checked>
-							None
-						</label>
-					</div>
-					<div class="radio">
-						<label>
-							<input type="radio" name="pitchQuantizeMode" id="chromatic" value="Chromatic" checked>
-							Chromatic
-						</label>
-					</div>
-					<div class="radio">
-						<label>
-							<input type="radio" name="pitchQuantizeMode" id="minorPentatonic" value="Minor Pentatonic" checked>
-							Minor Pentatonic
-						</label>
-					</div>										
+				<div class="btn-group" data-toggle="buttons">
+					<label class="btn btn-primary w-100 full-height">
+						<input type="radio" name="pitchQuantizeMode" id="none" value="None" checked>
+						None
+					</label>
+					<label class="btn btn-primary w-100 full-height">
+						<input type="radio" name="pitchQuantizeMode" id="chromatic" value="Chromatic" checked>
+						Chromatic
+					</label>
+					<label class="btn btn-primary active w-100 full-height">
+						<input type="radio" name="pitchQuantizeMode" id="minorPentatonic" value="Minor Pentatonic" checked>
+						Minor Pentatonic
+					</label>
 				</div>
 			</form>
 		</div>
