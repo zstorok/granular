@@ -199,3 +199,43 @@ body{
 .knob, .knob canvas {
     pointer-events: auto;
 }
+
+/* Hide the actual checkbox */
+.toggle-switch .checkbox {
+    display: none;
+}
+
+/* General style for the label */
+.toggle-switch .label {
+    cursor: pointer;
+    text-indent: -9999px;
+    width: 50px; /* Width of the toggle */
+    height: 25px; /* Height of the toggle */
+    background: grey;
+    display: block;
+    border-radius: 100px;
+    position: relative;
+}
+
+/* Style for the circle inside the toggle */
+.toggle-switch .label:after {
+    content: '';
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    width: 21px;
+    height: 21px;
+    background: #fff;
+    border-radius: 90px;
+    transition: 0.3s;
+}
+
+/* Change the styles when the checkbox is checked */
+.toggle-switch .checkbox:checked + .label {
+    background: #4cd964;
+}
+
+.toggle-switch .checkbox:checked + .label:after {
+    left: calc(100% - 2px);
+    transform: translateX(-100%);
+}
