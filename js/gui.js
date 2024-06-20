@@ -1,5 +1,5 @@
 function guiinit() {
-    const dialwidth = parseInt($('.col-sm-2').css('width')) - (parseInt($('.col-sm-2').css('width')) / 6);
+    const dialwidth = (parseInt($('.col-sm-2').css('width')) - (parseInt($('.col-sm-2').css('width')) / 6)) * 0.8;
 
     const settings = {
         min: 0,
