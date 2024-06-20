@@ -225,7 +225,7 @@ class Sample {
     constructor(buffer, loop = false, playbackRate = 1.0, reverse = false) {
         console.log("Sample " + buffer);
         this.context = context; // Assuming 'context' is the AudioContext instance you have elsewhere
-        if (reverse) {
+        if (reverse && buffer) {
             this.buffer = this.reverseBuffer(buffer);
         } else {
             this.buffer = buffer;
@@ -292,24 +292,6 @@ class Sample {
         return currentPlayheadPosition;
     }
 }
-
-// loading the first sound with XMLHttpRequest
-const request = new XMLHttpRequest();
-request.open('GET', 'audio/guitar.mp3', true);
-request.responseType = "arraybuffer";
-request.onload = () => {
-    context.decodeAudioData(request.response, (b) => {
-        buffer = b; // set the buffer
-        data = buffer.getChannelData(0);
-        isloaded = true;
-        const canvas1 = document.getElementById('canvas');
-        // initialize the processing draw when the buffer is ready
-        const processing = new Processing(canvas1, waveformdisplay);
-    }, () => {
-        console.log('loading failed');
-    });
-};
-request.send();
 
 // processing - waveform display - canvas 
 const waveformdisplay = (p) => {
