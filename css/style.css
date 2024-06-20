@@ -178,16 +178,19 @@ body{
 #play{
 	font-size: 1.5em;
 	background-color: lightgreen;
+	margin: 2px;
 }
 
 #reversePlay{
 	font-size: 1.5em;
 	background-color: lightblue;
+	margin: 2px;
 }
 
 #stop{
 	font-size: 1.5em;
 	background-color: pink;
+	margin: 2px;
 }
 
 /* Disable pointer events on the knob input */
@@ -251,4 +254,18 @@ body{
 .btn-group .btn {
 	font-size: 1em;
 	background-color: lightblue;
+	margin: 2px;
+}
+
+.sample-row {
+	margin: 2px;
+}
+
+
+.sample-row .btn {
+	font-size: 0.8em;
+}
+
+.sample-row .label {
+	font-size: 1em;
 }

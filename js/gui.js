@@ -182,6 +182,30 @@ function guiinit() {
         request.send();
     });
 
+    $('.sample-row button').each(function() {
+        $(this).click(function() {
+            var buttonId = $(this).attr('id'); // Correctly reference the button's ID
+            console.log("Sample button click: " + buttonId); // Logs the id of each button
+            const request = new XMLHttpRequest();
+            request.open('GET', 'audio/' + buttonId, true); // Ensure the file path is correct
+            request.responseType = "arraybuffer";
+            request.onload = () => {
+                context.decodeAudioData(request.response, (b) => {
+                    buffer = b; // set the buffer
+                    data = buffer.getChannelData(0);
+                    isloaded = true;
+                    const canvas1 = document.getElementById('canvas');
+                    const processing = new Processing(canvas1, waveformdisplay);
+                    load();
+                }, () => {
+                    console.log('loading failed');
+                    alert('loading failed');
+                });
+            };
+            request.send();
+        });
+    });
+
     const drop = document.getElementById('waveform');
     drop.addEventListener("dragover", (e) => {
         e.preventDefault();
