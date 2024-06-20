@@ -217,8 +217,8 @@ body{
 .toggle-switch .label {
     cursor: pointer;
     text-indent: -9999px;
-    width: 60px; /* Width of the toggle */
-    height: 25px; /* Height of the toggle */
+    width: 70px; /* Width of the toggle */
+    height: 35px; /* Height of the toggle */
     background: grey;
     display: block;
     border-radius: 100px;
@@ -231,8 +231,8 @@ body{
     position: absolute;
     top: 2px;
     left: 2px;
-    width: 21px;
-    height: 21px;
+    width: 31px;
+    height: 31px;
     background: #fff;
     border-radius: 90px;
     transition: 0.3s;
