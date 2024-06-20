@@ -45,38 +45,22 @@
 	</div>
 
 	<!-- controls row -->
-	<div class='row' id='controls'>
-		<div class='col-md-1 col-sm-1 col-xs-2'>
+	<div class='row' id='controls-row-1'>
+		<div class='col-md-2 col-sm-2 col-xs-2'>
 			<div class='label hidden-xs'>attack</div><br><br>
 			<input type="text" class="dial" id='attack' data-min='0' data-max='20'><br><br>
 		</div>
 
-		<div class='col-md-1 col-sm-1 col-xs-2'>
+		<div class='col-md-2 col-sm-2 col-xs-2'>
 			<div class='label hidden-xs'>release</div><br><br>
 			<input type="text" class="dial" id='release' data-min='0' data-max='20'>
 		</div>
 
-		<div class='col-md-1 col-sm-1 col-xs-2'>
+		<div class='col-md-2 col-sm-2 col-xs-2'>
 			<div class='label hidden-xs'>density</div><br><br>
 			<input type="text" class="dial" id='density' data-min='0' data-max='110'>
 		</div>
-
-		<div class='col-md-1 col-sm-1 col-xs-2'>
-			<div class='label hidden-xs'>spread</div><br><br>
-			<input type="text" class="dial" id='spread' data-min='0' data-max='100'>
-		</div>
-
-		<div class='col-md-1 col-sm-1 col-xs-2'>
-			<div class='label hidden-xs'>pan</div><br><br>
-			<input type="text" class="dial" id='pan' data-min='0' data-max='100'>
-		</div>
-
-		<div class='col-md-1 col-sm-1 col-xs-2'>
-			<div class='label hidden-xs'>tuning</div><br><br>
-			<input type="text" class="dial" id='tuning' data-min='-500' data-max='500'>
-		</div>
-
-		<div class='col-md-1 col-sm-2 col-xs-2'>
+		<div class='col-md-2 col-sm-2 col-xs-2'>
 			<div class='label hidden-xs'>quantize</div><br><br>
 			<input type="radio" id="none" name="pitchQuantizeMode" value="None">
 			<label for="none">None</label><br>
@@ -85,10 +69,28 @@
 			<input type="radio" id="minorPentatonic" name="pitchQuantizeMode" value="Minor Pentatonic">
 			<label for="minorPentatonic">Minor Pentatonic</label>
 		</div>
+		<div class='col-md-4 col-sm-4 col-xs-4'>
+			<button class="btn full-height" id="play">Play</button>
+			<button class="btn full-height" id="reversePlay">Reverse play</button>
+		</div>
+	</div>
+	<div class='row' id='controls-row-1'>
+		<div class='col-md-2 col-sm-2 col-xs-2'>
+			<div class='label hidden-xs'>spread</div><br><br>
+			<input type="text" class="dial" id='spread' data-min='0' data-max='100'>
+		</div>
 
 		<div class='col-md-2 col-sm-2 col-xs-2'>
-			<button class="btn w-100 full-height" id="play">Play</button>
-			<button class="btn w-100 full-height" id="reversePlay">Reverse play</button>
+			<div class='label hidden-xs'>pan</div><br><br>
+			<input type="text" class="dial" id='pan' data-min='0' data-max='100'>
+		</div>
+
+		<div class='col-md-2 col-sm-2 col-xs-2'>
+			<div class='label hidden-xs'>tuning</div><br><br>
+			<input type="text" class="dial" id='tuning' data-min='-500' data-max='500'>
+		</div>
+
+		<div class='col-md-2 col-sm-2 col-xs-2'>
 			<button class="btn w-100 full-height" id="stop">Stop</button>
 		</div>
 		<div class='col-md-1 col-sm-1 col-xs-2'>
