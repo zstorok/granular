@@ -522,4 +522,8 @@ $(document).ready(() => {
         }
     });
 
+    $('#reset').button().click(function () {
+        window.location.reload();
+    });
+
 });

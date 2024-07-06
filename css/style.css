@@ -269,3 +269,9 @@ body{
 .sample-row .label {
 	font-size: 0.8em;
 }
+
+#reset {
+	font-size: 4em;
+	margin: 2px;
+	background-color: white;
+}
