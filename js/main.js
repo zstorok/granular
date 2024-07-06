@@ -79,7 +79,7 @@ class Grain {
                 this.source.playbackRate.value = quantizedPlaybackRate + tuning;
                 console.log("Quantized playback rate: " + this.source.playbackRate.value);
             } else if (pitchQuantizeMode === QuantizeMode.NONE) {
-                this.source.playbackRate.value = scaledPositionY + tuning;
+                this.source.playbackRate.value = 1 + scaledPositionY + tuning;
                 console.log("Unquantized layback rate: " + this.source.playbackRate.value);
             } else {
                 console.error('Invalid pitch quantize mode');
